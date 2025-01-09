@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Computer Studies - Top Students</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #1e293b, #3b82f6);
+            color: #f4f4f9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin: 20px 0;
+            color: #f4f4f9;
+            text-shadow: 2px 2px 5px #000;
+        }
+
+        .card-container {
+            position: relative;
+            width: 90%; /* Adjust to control the size of the visible area */
+            height: 450px;
+            display: flex;
+            overflow: hidden;
+            justify-content: center;
+        }
+
+        .card-group {
+            display: flex;
+            transition: transform 1s ease; /* Smooth sliding animation */
+        }
+
+        .card {
+            width: 250px;
+            height: 400px;
+            margin: 0 10px;
+            border-radius: 20px;
+            background: linear-gradient(to bottom right, #0f172a, #334155);
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            /* border: 3px solid; */
+            border-image: linear-gradient(to right, #3b82f6, #9333ea) 1;
+        }
+
+        .card img {
+            width: 100%;
+            height: 60%;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .card h3 {
+            margin: 10px 0;
+            font-size: 1.5em;
+            color: #f4f4f9;
+        }
+
+        .card p {
+            margin: 5px 0;
+            font-size: 1em;
+            color: #cbd5e1;
+        }
+    </style>
+</head>
+<body>
+    <h1>Top Students - IT Computer Studies</h1>
+    <div class="card-container">
+        <div class="card-group">
+            <!-- Cards will be dynamically inserted here -->
+        </div>
+    </div>
+
+    <script>
+        const students = [
+            {name: 'Arun'},
+            {name: 'Aftab sir'},
+            { name: 'Alice', marks: '95/100', batch: '9:00 AM - 10:30 AM', module: 'HTML', img: 'https://via.placeholder.com/250x250' },
+            { name: 'Bob', marks: '90/100', batch: '11:00 AM - 12:30 PM', module: 'CSS', img: 'https://via.placeholder.com/250x250' },
+            { name: 'Charlie', marks: '85/100', batch: '1:00 PM - 2:30 PM', module: 'Beginner of JavaScript\n Advance of JavaScript', img: 'https://via.placeholder.com/250x250' },
+            { name: 'Diana', marks: '92/100', batch: '3:00 PM - 4:30 PM', module: 'Photoshop', img: 'https://via.placeholder.com/250x250' },
+            { name: 'Eve', marks: '93/100', batch: '5:00 PM - 6:30 PM', module: 'Python', img: 'https://via.placeholder.com/250x250' },
+            { name: 'Frank', marks: '89/100', batch: '7:00 PM - 8:30 PM', module: 'Java', img: 'https://via.placeholder.com/250x250' }
+        ];
+
+        const cardContainer = document.querySelector('.card-group');
+        let currentIndex = 0;
+
+        // Create and append cards
+        students.forEach((student) => {
+            const card = document.createElement('div');
+            card.classList.add('card');
+            card.innerHTML = `
+                <img src="${student.img}" alt="${student.name}">
+                <div class="card-content">
+                    <h3>${student.name}</h3>
+                    <p>Marks: ${student.marks}</p>
+                    <p>Batch: ${student.batch}</p>
+                    <p>Module: ${student.module}</p>
+                </div>
+            `;
+            cardContainer.appendChild(card);
+        });
+
+        const cards = document.querySelectorAll('.card');
+        const totalCards = cards.length;
+        const cardsPerSwipe = 1;
+
+        function showNextGroup() {
+            currentIndex += cardsPerSwipe;
+
+            if (currentIndex >= totalCards) {
+                currentIndex = 0; // Loop back to the start
+            }
+
+            cardContainer.style.transform = `translateX(-${currentIndex * (cards[0].offsetWidth + 28)}px)`;
+        }
+
+        // Initial display
+        showNextGroup();
+
+        // Rotate cards every 3 seconds
+        setInterval(showNextGroup, 2000);
+    </script>
+</body>
+</html>
